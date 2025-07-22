@@ -340,7 +340,7 @@ export class Driver {
       factory.createImportDeclaration(
         undefined,
         factory.createImportClause(
-          false,
+          true,
           undefined,
           factory.createNamedImports([
             factory.createImportSpecifier(
@@ -592,8 +592,8 @@ export class Driver {
                 ),
                 factory.createIdentifier("length")
               ),
-              factory.createToken(SyntaxKind.ExclamationEqualsEqualsToken),
-              factory.createNumericLiteral("1")
+              factory.createToken(SyntaxKind.EqualsEqualsEqualsToken),
+              factory.createNumericLiteral("0")
             ),
             factory.createBlock(
               [factory.createReturnStatement(factory.createNull())],
@@ -609,13 +609,17 @@ export class Driver {
                   factory.createIdentifier("row"),
                   undefined,
                   undefined,
-                  factory.createElementAccessExpression(
-                    factory.createPropertyAccessExpression(
-                      factory.createIdentifier("result"),
-                      factory.createIdentifier("rows")
-                    ),
-                    factory.createNumericLiteral("0")
-                  )
+                    factory.createAsExpression(
+                        factory.createElementAccessExpression(
+                            factory.createPropertyAccessExpression(
+                                factory.createIdentifier("result"),
+                                factory.createIdentifier("rows")
+                            ),
+                            factory.createNumericLiteral("0")
+                        ),
+                        factory.createKeywordTypeNode(SyntaxKind.AnyKeyword)
+                    )
+
                 ),
               ],
               NodeFlags.Const |
